@@ -9,8 +9,8 @@ pcnt_unit_handle_t pcnt_unit = NULL;
 void enc_init(void) {
   /*********⬇️ 脉冲编码器相关初始化 ⬇️**********/
   pcnt_unit_config_t unit_config = {
-      .high_limit = ENC_CNT_LIMIT,
-      .low_limit = -ENC_CNT_LIMIT,
+      .high_limit = 32767,
+      .low_limit = -32768,
   };
   ESP_ERROR_CHECK(pcnt_new_unit(&unit_config, &pcnt_unit));
   pcnt_glitch_filter_config_t filter_config = {
@@ -52,6 +52,8 @@ void enc_init(void) {
 int enc_get_count(void) {
   int count;
   pcnt_unit_get_count(pcnt_unit, &count);
+  count = count > ENC_CNT_LIMIT ? ENC_CNT_LIMIT : 
+        count < -ENC_CNT_LIMIT ? -ENC_CNT_LIMIT : count;
   return count;
 }
 

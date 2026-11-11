@@ -40,7 +40,7 @@ void motor_init(void) {
 }
 
 void motor_set_speed(uint32_t speed) { 
-      printf("speed:%d\n", (int16_t)speed);
+      // printf("speed:%d\n", (int16_t)speed);
     bdc_motor_set_speed(motor, (speed >= MOT_MAX_SPEED ? MOT_MAX_SPEED - 1 : speed)); 
 }
 

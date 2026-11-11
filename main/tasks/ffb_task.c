@@ -9,8 +9,8 @@
 
 bool angle_report(void){
   uint8_t buffer[24] = {0};
-  int count = enc_get_count(); //count 范围 -ENC_CNT_LIMIT ~ ENC_CNT_LIMIT
-  // int count = enc_get_count_test(); //count 范围 -ENC_CNT_LIMIT ~ ENC_CNT_LIMIT
+  // int count = enc_get_count(); //count 范围 -ENC_CNT_LIMIT ~ ENC_CNT_LIMIT
+  int count = enc_get_count_test(); //count 范围 -ENC_CNT_LIMIT ~ ENC_CNT_LIMIT
   int16_t X = (int16_t)((float)count / ENC_CNT_LIMIT * 32767.0);
   buffer[8] = (uint8_t)(X & 0x00FF);
   buffer[9] = (uint8_t)(X >> 8);
